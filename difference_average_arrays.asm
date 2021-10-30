@@ -1,15 +1,15 @@
 %macro pushd 0
-    push edx
-    push ecx
-    push ebx
     push eax
+    push ebx
+    push ecx
+    push edx
 %endmacro
 
 %macro popd 0
-    pop eax
-    pop ebx
-    pop ecx
     pop edx
+    pop ecx
+    pop ebx
+    pop eax
 %endmacro
 
 %macro print 2
@@ -84,7 +84,7 @@ _sum:
     cmp     bl, al
     jg      _finish
     
-_ifminus:
+_minus:
     mov     al, [count]
     neg     al
     mov     [count], al
@@ -94,7 +94,7 @@ _finish:
     mov     al, [count]
     dprint
     print   nlen, newline
-    print   len,message
+    print   mlen,message
     print   nlen, newline
     mov     eax, 1
     int     0x80
@@ -108,6 +108,6 @@ section .data
     minus       db "-"
     minuslen    equ $ -minus
     message     db "Done"
-    len         equ $ -message
+    mlen        equ $ -message
     newline     db 0xA, 0xD
     nlen        equ $ -newline
